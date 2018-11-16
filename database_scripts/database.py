@@ -30,7 +30,8 @@ class redshift_sql:
             table, schema)['constrained_columns']})
 
         return df.merge(pk, how='left', left_on='column', right_on='PK')\
-            .sort_values(by=['PK', 'distkey', 'sortkey'])
+            .sort_values(by=['PK', 'distkey', 'sortkey']).\
+            reset_index(inplace=True)
 
     def read_sql(self, sql_file_path):
         sql_file = open(sql_file_path, 'r').read()
@@ -42,4 +43,5 @@ class redshift_sql:
         sql_file = open(sql_file_path, 'r')
         sql_code = sql_file.read()
         sql_file.close()
-        self.connection.execute(sql.text(sql_code).execution_options(autommit=True))
+        self.connection.execute(sql.text(sql_code).
+                                execution_options(autommit=True))
