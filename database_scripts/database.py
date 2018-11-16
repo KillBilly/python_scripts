@@ -5,10 +5,9 @@ import pandas as pd
 class redshift_sql:
 
     def __init__(self, connection_string):
-        engine = sql.create_engine(connection_string)
-        connection = engine.connect()
-        inspect = sql.inspect(engine)
-        return {'engine': engine, 'inspect': inspect, 'connection': connection}
+        self.engine = sql.create_engine(connection_string)
+        self.connection = self.engine.connect()
+        self.inspect = sql.inspect(self.engine)
 
     """
     get schema names:
@@ -22,25 +21,25 @@ class redshift_sql:
     pd.DataFrame(df_lst)
     """
 
-    def get_table_attributes(self, schema, table, engine, inspect):
+    def get_table_attributes(self, schema, table):
         sql_code = "set search_path to " + schema + ";" + \
             "select \"column\", distkey, sortkey, type, \"notnull\" from \
             pg_table_def where tablename = '" + table + "';"
-        df = pd.read_sql_query(sql_code, engine)
-        pk = pd.DataFrame({'PK': inspect.get_pk_constraint(
+        df = pd.read_sql_query(sql_code, self.engine)
+        pk = pd.DataFrame({'PK': self.inspect.get_pk_constraint(
             table, schema)['constrained_columns']})
 
         return df.merge(pk, how='left', left_on='column', right_on='PK')\
             .sort_values(by=['PK', 'distkey', 'sortkey'])
 
-    def read_sql(self, sql_file_path, engine):
+    def read_sql(self, sql_file_path):
         sql_file = open(sql_file_path, 'r').read()
         sql_code = sql_file.read()
         sql_file.close()
-        return pd.read_sql_query(sql_code, engine)
+        return pd.read_sql_query(sql_code, self.engine)
 
-    def run_sql(self, sql_file_path, connection):
+    def run_sql(self, sql_file_path):
         sql_file = open(sql_file_path, 'r')
         sql_code = sql_file.read()
         sql_file.close()
-        connection.execute(sql.text(sql_code).execution_options(autommit=True))
+        self.connection.execute(sql.text(sql_code).execution_options(autommit=True))
