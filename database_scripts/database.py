@@ -1,5 +1,6 @@
 import sqlalchemy as sql
 import pandas as pd
+import numpy as np
 
 
 class redshift_sql:
@@ -34,13 +35,15 @@ class redshift_sql:
             reset_index(inplace=True)
 
     def read_sql(self, sql_file_path):
-        sql_file = open(sql_file_path, 'r').read()
+        sql_file = open(sql_file_path, 'r')
+        sql_file.seek(0) # Go back to the starting position
         sql_code = sql_file.read()
         sql_file.close()
-        return pd.read_sql_query(sql_code, self.engine)
+        return pd.read_sql_query(sql.text(sql_code), self.engine)
 
     def run_sql(self, sql_file_path):
         sql_file = open(sql_file_path, 'r')
+        sql_file.seek(0) # Go back to the starting position
         sql_code = sql_file.read()
         sql_file.close()
         self.connection.execute(sql.text(sql_code).
