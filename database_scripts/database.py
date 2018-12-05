@@ -32,7 +32,7 @@ class redshift_sql:
 
         return df.merge(pk, how='left', left_on='column', right_on='PK')\
             .sort_values(by=['PK', 'distkey', 'sortkey']).\
-            reset_index(inplace=True)
+            reset_index()
 
     def read_sql(self, sql_file_path):
         sql_file = open(sql_file_path, 'r')
