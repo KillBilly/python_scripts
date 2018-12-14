@@ -1,6 +1,11 @@
 import sqlalchemy as sql
 import pandas as pd
-import numpy as np
+
+# redshift connection string
+"""
+'postgresql://{username}:{pwd}\
+@gsco-prod-dw.coicvnfbc4te.us-east-1.redshift.amazonaws.com:8192/gscoprod'.format(username='',pwd='')
+"""
 
 
 class redshift_sql:
@@ -31,19 +36,20 @@ class redshift_sql:
             table, schema)['constrained_columns']})
 
         return df.merge(pk, how='left', left_on='column', right_on='PK')\
-            .sort_values(by=['PK', 'distkey', 'sortkey']).\
+            .sort_values(by=['PK', 'distkey', 'sortkey'],
+                         ascending=[True, True, False]).\
             reset_index()
 
     def read_sql(self, sql_file_path):
         sql_file = open(sql_file_path, 'r')
-        sql_file.seek(0) # Go back to the starting position
+        sql_file.seek(0)  # Go back to the starting position
         sql_code = sql_file.read()
         sql_file.close()
         return pd.read_sql_query(sql.text(sql_code), self.engine)
 
     def run_sql(self, sql_file_path):
         sql_file = open(sql_file_path, 'r')
-        sql_file.seek(0) # Go back to the starting position
+        sql_file.seek(0)  # Go back to the starting position
         sql_code = sql_file.read()
         sql_file.close()
         self.connection.execute(sql.text(sql_code).
