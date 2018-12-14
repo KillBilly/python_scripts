@@ -1,0 +1,151 @@
+
+body {
+    cursor: default;
+    font: small 'Arial',sans-serif;
+    margin: 0;
+    min-width: 360px;
+    min-height: 100%;
+    overflow-x: hidden;
+    text-align: -webkit-center;
+}
+
+.myButton {
+	-moz-box-shadow:inset 0px 2px 11px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 2px 11px 0px #ffffff;
+	box-shadow:inset 0px 2px 11px 0px #ffffff;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #f6f6f6));
+	background:-moz-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-webkit-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-o-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-ms-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0);
+	background-color:#ffffff;
+	-moz-border-radius:17px;
+	-webkit-border-radius:17px;
+	border-radius:17px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#666666;
+	font-family:Arial;
+	font-size:18px;
+	padding:9px 58px;
+	text-decoration:none;
+	text-shadow:0px 4px 0px #ffffff;
+}
+.myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f6f6f6), color-stop(1, #ffffff));
+	background:-moz-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:-webkit-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:-o-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:-ms-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6f6f6', endColorstr='#ffffff',GradientType=0);
+	background-color:#f6f6f6;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+
+
+textarea {
+  -moz-box-shadow:inset 0px 2px 11px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 2px 11px 0px #ffffff;
+	box-shadow:inset 0px 2px 11px 0px #ffffff;
+	/*background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #f6f6f6));
+	background:-moz-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-webkit-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-o-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-ms-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);*/
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0);
+	background-color:#ffffff;
+	-moz-border-radius:17px;
+	-webkit-border-radius:17px;
+	border-radius:17px;
+	border:3px solid #dcdcdc;
+	display:inline-block;
+}
+
+#custom-bg {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    left: 0;
+    margin: 0;
+    opacity: 0;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    transition: opacity 700ms;
+    width: 100%;
+    text-shadow: 0 0 black;
+}
+
+#lwz1 {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+
+
+#lga {
+    font: small 'Arial Rounded MT Bold',sans-serif;
+    flex-shrink: 0;
+    height: 231px;
+    margin-top: 45px;
+    text-align: -webkit-center;
+}
+
+form {
+    display: block;
+    margin-top: 0em;
+}
+
+#fkbx {
+    background-color: #F1F3F4;
+    border: none;
+    border-radius: 22px;
+    box-shadow: none;
+    outline: none;
+    opacity: 1;
+    transition: background-color 300ms ease-in-out;
+    transition: opacity 200ms;
+    max-width: 560px;
+}
+
+
+#fkbx>input {
+    background: transparent;
+    border: none;
+    bottom: 0;
+    box-sizing: border-box;
+    left: 0;
+    margin: 0;
+    outline: none;
+    padding: 0 8px;
+    position: absolute;
+    top: 2px;
+    width: 100%;
+}
+
+
+input {
+    -webkit-appearance: textfield;
+    background-color: white;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    padding: 1px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: initial;
+    border-image: initial;
+}

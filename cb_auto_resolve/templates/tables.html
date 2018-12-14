@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/tables.css') }}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+
+<div class=page>
+	<h1>Results</h1>
+	<br></br>
+	<h2><a href="/download" id="theButton"><button style="height:25px;width:150px">Download to CSV</button></a></h2>
+	<br></br>
+	{{data_table|safe}}
+</div>
+
+<script type="text/javascript">
+	function doWork(name) {
+		var buttons = document.querySelectorAll("#ev_button");
+
+		for (var i = 0, len = buttons.length; i < len; i++) {
+			buttons[i].disabled = true;
+		};
+
+		$.post("/evidencelink", {
+			link_code: name
+		}).done(function() {
+			for (var i = 0, len = buttons.length; i < len; i++) {
+				buttons[i].disabled = false;
+			};
+		});
+
+		// stop link reloading the page
+		event.preventDefault();
+	}
+</script>
+</html>

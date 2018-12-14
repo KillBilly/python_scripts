@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/styles.css') }}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+
+<body style="background: rgb(255, 255, 255);">
+	<div id="custom-bg" style="opacity: 0;"></div>
+	<div id="lwz1">
+		<div class id="lga">
+			<div style="margin-top:115px;height:92px;width:500px">
+				<font size="6">Chargeback Auto-Resolve</font>
+			</div>
+		</div>
+		<div class="sfbg nojsv" style="margin-top:-60px">
+			<div class="sfbgg"></div>
+		</div>
+		<form id='idac'>
+			<textarea id='input_cb' rows="20" , cols="80"></textarea>
+			<script>
+				$("textarea").resizable({
+					resize: function() {}
+				});
+			</script>
+
+			<br /><br />
+			This will send data using AJAX to server:
+			<br /><br />
+
+			<button href="#" class='myButton' id="theButton">
+				<i class="fa fa-refresh fa-1x" id="lock-refresh"></i> Resolve</button>
+
+			<script type="text/javascript">
+				$('#theButton').click(function() {
+					$('#lock-refresh').addClass('fa-spin');
+					doWork();
+				});
+
+				function doWork() {
+					// ajax the JSON to the server
+					if (document.getElementById('input_cb').value == '') {
+						alert("Please Fill in Chargeback Codes");
+						return 200;
+					}
+					$.post("/receiver", {
+						data: document.getElementById('input_cb').value
+					}).fail(function() {
+						$('#lock-refresh').removeClass('fa-spin');
+						alert("Wrong Username/Password. Try again.");
+						window.location.href = "http://127.0.0.1:5000/";
+					}).done(function() {
+						$('#lock-refresh').removeClass('fa-spin');
+						window.location.href = "http://127.0.0.1:5000/tables";
+					});
+					// stop link reloading the page
+					event.preventDefault();
+				}
+			</script>
+
+		</form>
+
+</body>
+
+</html>
